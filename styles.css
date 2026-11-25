@@ -206,3 +206,20 @@ nav a:hover { color: var(--coral); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* Activity 3 - Booking Form */
+
+.booking-form input:focus,
+.booking-form select:focus {
+    outline: 2px solid var(--coral);
+    border-color: var(--navy);
+}
+
+.booking-form button {
+    width: 100%;
+}
+
+.booking-form button[type="reset"] {
+    background: var(--navy);
+    color: white;
+}
