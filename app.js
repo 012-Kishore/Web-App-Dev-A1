@@ -10,14 +10,58 @@ function showToast(message) {
   showToast.timer = setTimeout(() => { toast.style.opacity = "0"; }, 2500);
 }
 
+const menuToggle = document.querySelector("#menu-toggle");
+const mainNav = document.querySelector("#main-nav");
+
+if (menuToggle && mainNav) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = mainNav.classList.toggle("is-open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  });
+  mainNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+    mainNav.classList.remove("is-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation");
+  }));
+}
+
+const matchCards = [...document.querySelectorAll(".match-card[data-match]")];
+const teamFilter = document.querySelector("#team-filter");
+const matchGrid = document.querySelector("#match-cards");
+const gridButton = document.querySelector("#grid-view");
+const listButton = document.querySelector("#list-view");
+
+if (teamFilter) {
+  teamFilter.addEventListener("change", () => {
+    const team = teamFilter.value;
+    matchCards.forEach((card) => {
+      const teams = card.dataset.teams.split(",").map((name) => name.trim());
+      card.hidden = team !== "all" && !teams.includes(team);
+    });
+  });
+}
+
+function setMatchView(view) {
+  if (!matchGrid || !gridButton || !listButton) return;
+  const showList = view === "list";
+  matchGrid.classList.toggle("is-list", showList);
+  gridButton.classList.toggle("is-active", !showList);
+  listButton.classList.toggle("is-active", showList);
+  gridButton.setAttribute("aria-pressed", String(!showList));
+  listButton.setAttribute("aria-pressed", String(showList));
+}
+
+gridButton?.addEventListener("click", () => setMatchView("grid"));
+listButton?.addEventListener("click", () => setMatchView("list"));
+
 const matchSelect = document.querySelector("#match");
 const standSelect = document.querySelector("#stand");
 const quantityInput = document.querySelector("#quantity");
 const summaryCard = document.querySelector(".summary-card");
-const matchRows = [...document.querySelectorAll(".schedule-table tbody tr[data-match]")];
 
 if (matchSelect && standSelect && quantityInput && summaryCard) {
-  const matches = matchRows.map((row) => row.dataset);
+  const matches = matchCards.map((card) => card.dataset);
 
   matches.forEach((match) => {
     const option = document.createElement("option");
@@ -48,11 +92,11 @@ if (matchSelect && standSelect && quantityInput && summaryCard) {
   quantityInput.addEventListener("input", () => updateBookingSummary());
   quantityInput.addEventListener("change", () => updateBookingSummary());
 
-  document.querySelectorAll(".schedule-table .book-button").forEach((button) => {
+  document.querySelectorAll(".match-card .book-button").forEach((button) => {
     button.addEventListener("click", () => {
-      const row = button.closest("tr");
-      if (!row) return;
-      matchSelect.value = row.dataset.match;
+      const card = button.closest(".match-card");
+      if (!card) return;
+      matchSelect.value = card.dataset.match;
       updateBookingSummary();
       document.querySelector("#booking").scrollIntoView({ behavior: "smooth", block: "start" });
     });

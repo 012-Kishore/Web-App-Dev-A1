@@ -13,12 +13,13 @@
     <a class="brand" href="#home" aria-label="IPL 2026 home">IPL <span>2026</span></a>
 
 
-    <nav aria-label="Main navigation">
-    <a href="#matches">Matches</a>
-    <a href="booking.html">Book Ticket</a>
-    <a href="#my-bookings">My Bookings</a>
-    <a href="#guidelines">Guidelines</a>
-</nav>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav id="main-nav" aria-label="Main navigation">
+      <a href="#matches">Matches</a>
+      <a href="booking.html">Book Ticket</a>
+      <a href="#my-bookings">My Bookings</a>
+      <a href="#guidelines">Guidelines</a>
+    </nav>
   </header>
 
   <main>
@@ -66,27 +67,52 @@
         <h2 id="matches-title">Match Schedule</h2>
         <p>Browse the sample schedule and select a team to filter the matches.</p>
       </div>
-      <div class="filter-row">
-        <label for="team-filter">Filter by team</label>
-        <select id="team-filter">
-          <option value="all">All Teams</option>
-          <option>Chennai Super Kings</option><option>Mumbai Indians</option>
-          <option>Royal Challengers Bengaluru</option><option>Kolkata Knight Riders</option>
-          <option>Sunrisers Hyderabad</option><option>Rajasthan Royals</option>
-        </select>
+      <div class="schedule-tools">
+        <div class="filter-row">
+          <label for="team-filter">Filter by team</label>
+          <select id="team-filter">
+            <option value="all">All Teams</option>
+            <option>Chennai Super Kings</option><option>Mumbai Indians</option>
+            <option>Royal Challengers Bengaluru</option><option>Kolkata Knight Riders</option>
+            <option>Sunrisers Hyderabad</option><option>Rajasthan Royals</option>
+          </select>
+        </div>
+        <div class="view-toggle" role="group" aria-label="Match layout">
+          <button id="grid-view" type="button" aria-pressed="true" class="is-active">Grid</button>
+          <button id="list-view" type="button" aria-pressed="false">List</button>
+        </div>
       </div>
-      <div class="table-wrap">
-        <table class="schedule-table">
-          <thead><tr><th>Match Number</th><th>Teams</th><th>Date &amp; Time</th><th>Venue</th><th>General</th><th>Premium</th><th>VIP</th><th>Action</th></tr></thead>
-          <tbody>
-            <tr data-teams="Chennai Super Kings,Mumbai Indians" data-match="Match 1: Chennai Super Kings vs Mumbai Indians" data-date="1 April 2026, 7:30 PM" data-venue="M. A. Chidambaram Stadium, Chennai" data-general="800" data-premium="1800" data-vip="4500"><td>Match 1</td><td>Chennai Super Kings vs Mumbai Indians</td><td>1 Apr 2026 · 7:30 PM</td><td>M. A. Chidambaram Stadium, Chennai</td><td>₹800</td><td>₹1,800</td><td>₹4,500</td><td><button class="book-button" type="button">Book</button></td></tr>
-            <tr data-teams="Royal Challengers Bengaluru,Kolkata Knight Riders" data-match="Match 2: Royal Challengers Bengaluru vs Kolkata Knight Riders" data-date="2 April 2026, 7:30 PM" data-venue="M. Chinnaswamy Stadium, Bengaluru" data-general="700" data-premium="1600" data-vip="4000"><td>Match 2</td><td>Royal Challengers Bengaluru vs Kolkata Knight Riders</td><td>2 Apr 2026 · 7:30 PM</td><td>M. Chinnaswamy Stadium, Bengaluru</td><td>₹700</td><td>₹1,600</td><td>₹4,000</td><td><button class="book-button" type="button">Book</button></td></tr>
-            <tr data-teams="Sunrisers Hyderabad,Rajasthan Royals" data-match="Match 3: Sunrisers Hyderabad vs Rajasthan Royals" data-date="3 April 2026, 7:30 PM" data-venue="Rajiv Gandhi International Cricket Stadium, Hyderabad" data-general="650" data-premium="1500" data-vip="3800"><td>Match 3</td><td>Sunrisers Hyderabad vs Rajasthan Royals</td><td>3 Apr 2026 · 7:30 PM</td><td>Rajiv Gandhi International Cricket Stadium, Hyderabad</td><td>₹650</td><td>₹1,500</td><td>₹3,800</td><td><button class="book-button" type="button">Book</button></td></tr>
-            <tr data-teams="Mumbai Indians,Kolkata Knight Riders" data-match="Match 4: Mumbai Indians vs Kolkata Knight Riders" data-date="4 April 2026, 7:30 PM" data-venue="Wankhede Stadium, Mumbai" data-general="900" data-premium="2000" data-vip="5000"><td>Match 4</td><td>Mumbai Indians vs Kolkata Knight Riders</td><td>4 Apr 2026 · 7:30 PM</td><td>Wankhede Stadium, Mumbai</td><td>₹900</td><td>₹2,000</td><td>₹5,000</td><td><button class="book-button" type="button">Book</button></td></tr>
-            <tr data-teams="Chennai Super Kings,Royal Challengers Bengaluru" data-match="Match 5: Chennai Super Kings vs Royal Challengers Bengaluru" data-date="5 April 2026, 3:30 PM" data-venue="M. A. Chidambaram Stadium, Chennai" data-general="750" data-premium="1700" data-vip="4200"><td>Match 5</td><td>Chennai Super Kings vs Royal Challengers Bengaluru</td><td>5 Apr 2026 · 3:30 PM</td><td>M. A. Chidambaram Stadium, Chennai</td><td>₹750</td><td>₹1,700</td><td>₹4,200</td><td><button class="book-button" type="button">Book</button></td></tr>
-            <tr data-teams="Rajasthan Royals,Sunrisers Hyderabad" data-match="Match 6: Rajasthan Royals vs Sunrisers Hyderabad" data-date="6 April 2026, 7:30 PM" data-venue="Sawai Mansingh Stadium, Jaipur" data-general="600" data-premium="1400" data-vip="3500"><td>Match 6</td><td>Rajasthan Royals vs Sunrisers Hyderabad</td><td>6 Apr 2026 · 7:30 PM</td><td>Sawai Mansingh Stadium, Jaipur</td><td>₹600</td><td>₹1,400</td><td>₹3,500</td><td><button class="book-button" type="button">Book</button></td></tr>
-          </tbody>
-        </table>
+      <div class="match-grid" id="match-cards">
+        <article class="match-card" data-teams="Chennai Super Kings,Mumbai Indians" data-match="Match 1: Chennai Super Kings vs Mumbai Indians" data-date="1 April 2026, 7:30 PM" data-venue="M. A. Chidambaram Stadium, Chennai" data-general="800" data-premium="1800" data-vip="4500">
+          <div class="match-card-heading"><span class="match-number">Match 1</span><h3>Chennai Super Kings vs Mumbai Indians</h3></div>
+          <p><strong>Date &amp; Time</strong><span>1 Apr 2026 · 7:30 PM</span></p><p><strong>Venue</strong><span>M. A. Chidambaram Stadium, Chennai</span></p>
+          <div class="match-prices"><span>General <strong>₹800</strong></span><span>Premium <strong>₹1,800</strong></span><span>VIP <strong>₹4,500</strong></span></div><button class="book-button" type="button">Book</button>
+        </article>
+        <article class="match-card" data-teams="Royal Challengers Bengaluru,Kolkata Knight Riders" data-match="Match 2: Royal Challengers Bengaluru vs Kolkata Knight Riders" data-date="2 April 2026, 7:30 PM" data-venue="M. Chinnaswamy Stadium, Bengaluru" data-general="700" data-premium="1600" data-vip="4000">
+          <div class="match-card-heading"><span class="match-number">Match 2</span><h3>Royal Challengers Bengaluru vs Kolkata Knight Riders</h3></div>
+          <p><strong>Date &amp; Time</strong><span>2 Apr 2026 · 7:30 PM</span></p><p><strong>Venue</strong><span>M. Chinnaswamy Stadium, Bengaluru</span></p>
+          <div class="match-prices"><span>General <strong>₹700</strong></span><span>Premium <strong>₹1,600</strong></span><span>VIP <strong>₹4,000</strong></span></div><button class="book-button" type="button">Book</button>
+        </article>
+        <article class="match-card" data-teams="Sunrisers Hyderabad,Rajasthan Royals" data-match="Match 3: Sunrisers Hyderabad vs Rajasthan Royals" data-date="3 April 2026, 7:30 PM" data-venue="Rajiv Gandhi International Cricket Stadium, Hyderabad" data-general="650" data-premium="1500" data-vip="3800">
+          <div class="match-card-heading"><span class="match-number">Match 3</span><h3>Sunrisers Hyderabad vs Rajasthan Royals</h3></div>
+          <p><strong>Date &amp; Time</strong><span>3 Apr 2026 · 7:30 PM</span></p><p><strong>Venue</strong><span>Rajiv Gandhi International Cricket Stadium, Hyderabad</span></p>
+          <div class="match-prices"><span>General <strong>₹650</strong></span><span>Premium <strong>₹1,500</strong></span><span>VIP <strong>₹3,800</strong></span></div><button class="book-button" type="button">Book</button>
+        </article>
+        <article class="match-card" data-teams="Mumbai Indians,Kolkata Knight Riders" data-match="Match 4: Mumbai Indians vs Kolkata Knight Riders" data-date="4 April 2026, 7:30 PM" data-venue="Wankhede Stadium, Mumbai" data-general="900" data-premium="2000" data-vip="5000">
+          <div class="match-card-heading"><span class="match-number">Match 4</span><h3>Mumbai Indians vs Kolkata Knight Riders</h3></div>
+          <p><strong>Date &amp; Time</strong><span>4 Apr 2026 · 7:30 PM</span></p><p><strong>Venue</strong><span>Wankhede Stadium, Mumbai</span></p>
+          <div class="match-prices"><span>General <strong>₹900</strong></span><span>Premium <strong>₹2,000</strong></span><span>VIP <strong>₹5,000</strong></span></div><button class="book-button" type="button">Book</button>
+        </article>
+        <article class="match-card" data-teams="Chennai Super Kings,Royal Challengers Bengaluru" data-match="Match 5: Chennai Super Kings vs Royal Challengers Bengaluru" data-date="5 April 2026, 3:30 PM" data-venue="M. A. Chidambaram Stadium, Chennai" data-general="750" data-premium="1700" data-vip="4200">
+          <div class="match-card-heading"><span class="match-number">Match 5</span><h3>Chennai Super Kings vs Royal Challengers Bengaluru</h3></div>
+          <p><strong>Date &amp; Time</strong><span>5 Apr 2026 · 3:30 PM</span></p><p><strong>Venue</strong><span>M. A. Chidambaram Stadium, Chennai</span></p>
+          <div class="match-prices"><span>General <strong>₹750</strong></span><span>Premium <strong>₹1,700</strong></span><span>VIP <strong>₹4,200</strong></span></div><button class="book-button" type="button">Book</button>
+        </article>
+        <article class="match-card" data-teams="Rajasthan Royals,Sunrisers Hyderabad" data-match="Match 6: Rajasthan Royals vs Sunrisers Hyderabad" data-date="6 April 2026, 7:30 PM" data-venue="Sawai Mansingh Stadium, Jaipur" data-general="600" data-premium="1400" data-vip="3500">
+          <div class="match-card-heading"><span class="match-number">Match 6</span><h3>Rajasthan Royals vs Sunrisers Hyderabad</h3></div>
+          <p><strong>Date &amp; Time</strong><span>6 Apr 2026 · 7:30 PM</span></p><p><strong>Venue</strong><span>Sawai Mansingh Stadium, Jaipur</span></p>
+          <div class="match-prices"><span>General <strong>₹600</strong></span><span>Premium <strong>₹1,400</strong></span><span>VIP <strong>₹3,500</strong></span></div><button class="book-button" type="button">Book</button>
+        </article>
       </div>
       <p class="schedule-note">Sample schedule and ticket prices for this activity.</p>
     </section>
